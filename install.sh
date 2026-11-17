@@ -35,7 +35,7 @@ curl -fsSL -o "$tmp/$file" "$url/$file"
 curl -fsSL -o "$tmp/checksums.txt" "$url/checksums.txt"
 
 # the file must be the one the release lists
-want=$(awk -v f="$file" '$2 == f {print $1}' "$tmp/checksums.txt")
+want=$(awk -v f="$file" '$2 == f || $2 == "*" f {print $1}' "$tmp/checksums.txt")
 if command -v sha256sum >/dev/null 2>&1; then
   got=$(sha256sum "$tmp/$file" | awk '{print $1}')
 else
