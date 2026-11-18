@@ -2,6 +2,9 @@
 #
 #   irm https://raw.githubusercontent.com/pingdrop/releases/main/install.ps1 | iex
 #
+# Windows comes in a later release: while the latest release has no build
+# for Windows, this says so and installs nothing.
+#
 # $env:PINGDROP_VERSION = "v0.2.0"   install that release instead of the latest
 # $env:PINGDROP_INSTALL_DIR = "dir"  install there instead of %LOCALAPPDATA%\Programs\pingdrop
 
@@ -34,7 +37,18 @@
   New-Item -ItemType Directory -Path $tmp | Out-Null
   try {
     Write-Host "downloading $file ..."
-    Invoke-WebRequest -UseBasicParsing -Uri "$url/$file" -OutFile "$tmp\$file"
+    try {
+      Invoke-WebRequest -UseBasicParsing -Uri "$url/$file" -OutFile "$tmp\$file"
+    } catch {
+      # a release made without Windows has no such file: say so, and leave
+      # the terminal open (this runs through iex, where exit would close it)
+      $response = $_.Exception.Response
+      if ($response -and [int]$response.StatusCode -eq 404) {
+        Write-Host "pingdrop: this release has no build for Windows. Windows comes in a later release; nothing was installed. See https://github.com/$repo#readme"
+        return
+      }
+      throw
+    }
     Invoke-WebRequest -UseBasicParsing -Uri "$url/checksums.txt" -OutFile "$tmp\checksums.txt"
 
     # the file must be the one the release lists
