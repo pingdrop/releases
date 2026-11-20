@@ -2,10 +2,11 @@
 #
 #   irm https://raw.githubusercontent.com/pingdrop/releases/main/install.ps1 | iex
 #
-# Windows comes in a later release: while the latest release has no build
-# for Windows, this says so and installs nothing.
+# A release made without Windows (just release-unix in apps) has no build
+# for it: while such a release is the latest, this says so and installs
+# nothing.
 #
-# $env:PINGDROP_VERSION = "v0.2.0"   install that release instead of the latest
+# $env:PINGDROP_VERSION = "v0.4.0"   install that release instead of the latest
 # $env:PINGDROP_INSTALL_DIR = "dir"  install there instead of %LOCALAPPDATA%\Programs\pingdrop
 
 & {
