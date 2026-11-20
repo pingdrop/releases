@@ -1,7 +1,21 @@
 # pingdrop downloads
 
 The `pingdrop` command for macOS, Linux and Windows, and the desktop app for
-Windows.
+macOS (Apple silicon) and Windows.
+
+## macOS: the desktop app
+
+Download [`pingdrop-desktop-darwin-arm64.dmg`](https://github.com/pingdrop/releases/releases/latest/download/pingdrop-desktop-darwin-arm64.dmg),
+open it and drag Pingdrop to Applications. It is for Apple silicon. The app
+is not notarized yet, so macOS refuses to open it the first time; clear its
+download flag once, in Terminal:
+
+```sh
+xattr -dr com.apple.quarantine /Applications/Pingdrop.app
+```
+
+The first time you connect, macOS asks once for an administrator password,
+to install the helper that captures the traffic.
 
 ## Windows: the desktop app
 
@@ -67,6 +81,7 @@ The newest build of each kind is always at:
 | Linux, ARM64 | [`pingdrop-linux-arm64`](https://github.com/pingdrop/releases/releases/latest/download/pingdrop-linux-arm64) |
 | Windows, x86-64 | [`pingdrop-windows-amd64.exe`](https://github.com/pingdrop/releases/releases/latest/download/pingdrop-windows-amd64.exe) |
 | Windows, ARM64 | [`pingdrop-windows-arm64.exe`](https://github.com/pingdrop/releases/releases/latest/download/pingdrop-windows-arm64.exe) |
+| macOS, the desktop app (Apple silicon) | [`pingdrop-desktop-darwin-arm64.dmg`](https://github.com/pingdrop/releases/releases/latest/download/pingdrop-desktop-darwin-arm64.dmg) |
 | Windows, the desktop app | [`pingdrop-desktop-windows-amd64-setup.exe`](https://github.com/pingdrop/releases/releases/latest/download/pingdrop-desktop-windows-amd64-setup.exe) |
 | Checksums (SHA-256) | [`checksums.txt`](https://github.com/pingdrop/releases/releases/latest/download/checksums.txt) |
 
